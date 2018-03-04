@@ -51,8 +51,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\PatchSensor.cs" />
-     <Compile Include="Assets\Scripts\TapeInstantiator.cs" />
+     <Compile Include="Assets\Scripts\CrackPatchCheck.cs" />
+     <Compile Include="Assets\Scripts\DoorCrackCheck.cs" />
+     <Compile Include="Assets\Scripts\DoorManager.cs" />
+     <Compile Include="Assets\Scripts\PatchCheck.cs" />
+     <Compile Include="Assets\Scripts\TapeManager.cs" />
+     <Compile Include="Assets\Scripts\TextFader.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
