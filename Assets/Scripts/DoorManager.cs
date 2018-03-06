@@ -26,14 +26,14 @@ public class DoorManager : MonoBehaviour {
 
 	void Update () {
 		if (doorState == "non-existent") {
-			if (Input.GetKeyDown ("space")) {
-				newDoor ();
-			}
+			//if (Input.GetKeyDown ("space")) {
+				NewDoor ();
+			//}
 		}else{
 			if (doorState == "entering") {			
-				enterDoor ();
+				EnterDoor ();
 			}else if (doorState == "exiting") {
-				exitDoor ();
+				ExitDoor ();
 			}
 		}
 	}
@@ -44,22 +44,30 @@ public class DoorManager : MonoBehaviour {
 		}
 	}
 
-	void newDoor(){
+	void NewDoor(){		
 		doorInstance = Instantiate (door, midRightPoint, Quaternion.identity);
+		float doorWidth = doorInstance.GetComponent<SpriteRenderer>().bounds.size.x;
+		doorInstance.transform.Translate (new Vector3 (doorWidth, 0, 0));
 		isDoorPatchedUp = false;
 		doorState = "entering";
+		if (GetComponent<TapeManager> () != null) {
+			GetComponent<TapeManager> ().tapeZ = 0f;
+			Debug.Log ("TAPEZ RESET");
+		}
 	}
 
-	void enterDoor(){
+	void EnterDoor(){
 		doorInstance.transform.Translate (Vector3.left * moveSpeed * Time.deltaTime);
 		if (doorInstance.transform.position.x <= centerPoint.x) {
 			doorState = "hold";
 		}
 	}
 
-	void exitDoor(){
+	void ExitDoor(){
+		float doorWidth = doorInstance.GetComponent<SpriteRenderer>().bounds.size.x;
 		doorInstance.transform.Translate (Vector3.left * moveSpeed * Time.deltaTime);
-		if (doorInstance.transform.position.x <= midLeftPoint.x) {
+
+		if (doorInstance.transform.position.x <= midLeftPoint.x - doorWidth) {
 			Destroy (doorInstance);
 			doorState = "non-existent";
 		}
